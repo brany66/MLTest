@@ -1,9 +1,11 @@
-package com.madhukaraphatak.examples.sparktwo
+package edu.nju.pasalab
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 
 /**
+  * Created by YWJ on 2016.12.7.
+  * Copyright (c) 2016 NJU PASA Lab All rights reserved.
   * Time window Example
   */
 object TimeWindowExample {
@@ -25,7 +27,7 @@ object TimeWindowExample {
     sparkSession.sparkContext.setLogLevel("ERROR")
     val stocksDF = sparkSession.read.option("header","true").
       option("inferSchema","true")
-      .csv("src/main/resources/applestock.csv")
+      .csv("data/applestock.csv")
 
     //weekly average of 2016
 

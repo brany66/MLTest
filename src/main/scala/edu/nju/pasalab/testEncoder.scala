@@ -12,7 +12,6 @@ import scala.collection.Iterator
 import java.util._
 /**
   * Created by YWJ on 2016.11.19.
-  * Contact at wyang@smail.nju.edu.cn
   * Copyright (c) 2016 NJU PASA Lab All rights reserved.
   */
 object testEncoder {

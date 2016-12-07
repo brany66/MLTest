@@ -1,8 +1,9 @@
-package com.madhukaraphatak.examples.sparktwo
+package edu.nju.pasalab.dataSet
 
 import org.apache.spark.sql.SparkSession
-
 /**
+  * Created by YWJ on 2016.11.19.
+  * Copyright (c) 2016 NJU PASA Lab All rights reserved.
   * Logical Plans for Dataframe and Dataset
   */
 object DatasetVsDataFrame {
@@ -22,8 +23,8 @@ object DatasetVsDataFrame {
 
     //read data from text file
 
-    val df = sparkSession.read.option("header","true").option("inferSchema","true").csv("src/main/resources/sales.csv")
-    val ds = sparkSession.read.option("header","true").option("inferSchema","true").csv("src/main/resources/sales.csv").as[Sales]
+    val df = sparkSession.read.option("header","true").option("inferSchema","true").csv("data/sales.csv")
+    val ds = sparkSession.read.option("header","true").option("inferSchema","true").csv("data/sales.csv").as[Sales]
 
 
     val selectedDF = df.select("itemId")

@@ -1,4 +1,4 @@
-package edu.nju.pasalab
+package edu.nju.pasalab.SQL
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.catalyst.expressions.{Literal, Multiply}
@@ -6,6 +6,11 @@ import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 import org.apache.spark.sql.catalyst.rules.Rule
 
 /**
+  * User Defined Optimization
+  */
+/**
+  * Created by YWJ on 2016.12.7.
+  * Copyright (c) 2016 NJU PASA Lab All rights reserved.
   * User Defined Optimization
   */
 object CustomOptimizationExample {

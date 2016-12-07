@@ -1,9 +1,11 @@
-package com.madhukaraphatak.examples.sparktwo
+package edu.nju.pasalab.dataSet
 
 import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}
 import org.apache.spark.sql.{Row, SparkSession}
-
 /**
+  * Created by YWJ on 2016.11.19.
+  * Copyright (c) 2016 NJU PASA Lab All rights reserved.
+  *
   * RDD API to Dataset API
   */
 object RDDToDataSet {
@@ -20,8 +22,8 @@ object RDDToDataSet {
 
 
     //read data from text file
-    val rdd = sparkContext.textFile("src/main/resources/data.txt")
-    val ds = sparkSession.read.text("src/main/resources/data.txt").as[String]
+    val rdd = sparkContext.textFile("data/data.txt")
+    val ds = sparkSession.read.text("data/data.txt").as[String]
 
 
     // do count

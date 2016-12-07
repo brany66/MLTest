@@ -1,4 +1,4 @@
-package com.madhukaraphatak.examples.sparktwo
+package edu.nju.pasalab.dataSet
 
 import org.apache.spark.sql.SparkSession
 
@@ -15,7 +15,7 @@ object DataSetWordCount {
       .getOrCreate()
 
     import sparkSession.implicits._
-    val data = sparkSession.read.text("src/main/resources/data.txt").as[String]
+    val data = sparkSession.read.text("data/data.txt").as[String]
 
     val words = data.flatMap(value => value.split("\\s+"))
 
