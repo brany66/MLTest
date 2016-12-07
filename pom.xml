@@ -1,0 +1,282 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu.nju.pasalab</groupId>
+  <artifactId>sparkTest</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <inceptionYear>2008</inceptionYear>
+
+  <properties>
+    <!-- specify project encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!-- specify scala version in project -->
+    <scala.version>2.10.4</scala.version>
+    <scala.binary.version>2.10</scala.binary.version>
+    <!-- specify spark version in project -->
+    <spark.version>2.0.2</spark.version>
+    <hadoop.version>2.7.2</hadoop.version>
+    <!-- specify breeze version in project -->
+    <breeze.version>0.12</breeze.version>
+    <!-- specify java and Maven version in project -->
+    <java.version>1.7</java.version>
+    <maven.version>3.3.9</maven.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>central</id>
+      <!-- This should be at top, it makes maven try the central repo first and then others and hence faster dep resolution -->
+      <name>Maven Repository</name>
+      <url>https://repo1.maven.org/maven2</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <!-- list of other repositories -->
+    <repository>
+      <id>SparkPackagesRepo</id>
+      <url>http://dl.bintray.com/spark-packages/maven</url>
+    </repository>
+    <repository>
+      <id>Typesafe Repository</id>
+      <url>https://repo.typesafe.com/typesafe/releases/</url>
+    </repository>
+    <repository>
+      <id>Akka Repository</id>
+      <url>http://repo.akka.io/releases/</url>
+    </repository>
+    <repository>
+      <id>Sonatype Snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </repository>
+    <repository>
+      <id>Sonatype Releases</id>
+      <url>https://oss.sonatype.org/content/repositories/releases/</url>
+    </repository>
+    <repository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+    <repository>
+      <id>Repository ankurdave</id>
+      <url>https://raw.githubusercontent.com/ankurdave/maven-repo/master</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.specs</groupId>
+      <artifactId>specs</artifactId>
+      <version>1.2.5</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- list of spark dependencies -->
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.10</artifactId>
+      <version>${spark.version}</version>
+      <!--<scope>provided</scope>-->
+      <exclusions>
+        <exclusion>
+          <!-- make sure wrong scala version is not pulled in -->
+          <groupId>org.scala-lang</groupId>
+          <artifactId>scala-library</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-sql_2.10</artifactId>
+      <version>${spark.version}</version>
+      <exclusions>
+        <exclusion>
+          <!-- make sure wrong scala version is not pulled in -->
+          <groupId>org.scala-lang</groupId>
+          <artifactId>scala-library</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>amplab</groupId>
+      <artifactId>spark-indexedrdd</artifactId>
+      <version>0.3</version>
+      <exclusions>
+        <exclusion>
+          <!-- make sure wrong scala version is not pulled in -->
+          <groupId>org.scala-lang</groupId>
+          <artifactId>scala-library</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- list of hadoop dependencies -->
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>${hadoop.version}</version>
+      <!--<scope>provided</scope>-->
+    </dependency>
+    <!-- list of trove4j dependencies -->
+    <dependency>
+      <groupId>net.sf.trove4j</groupId>
+      <artifactId>trove4j</artifactId>
+      <version>3.0.3</version>
+    </dependency>
+    <!-- list of breeze dependencies -->
+    <dependency>
+      <groupId>org.scalanlp</groupId>
+      <artifactId>breeze_2.10</artifactId>
+      <version>${breeze.version}</version>
+      <exclusions>
+        <exclusion>
+          <!-- make sure wrong scala version is not pulled in -->
+          <groupId>org.scala-lang</groupId>
+          <artifactId>scala-library</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.scalanlp</groupId>
+      <artifactId>breeze-natives_2.10</artifactId>
+      <version>${breeze.version}</version>
+      <exclusions>
+        <exclusion>
+          <!-- make sure wrong scala version is not pulled in -->
+          <groupId>org.scala-lang</groupId>
+          <artifactId>scala-library</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.scalanlp</groupId>
+      <artifactId>breeze-viz_2.10</artifactId>
+      <version>${breeze.version}</version>
+      <exclusions>
+        <exclusion>
+          <!-- make sure wrong scala version is not pulled in -->
+          <groupId>org.scala-lang</groupId>
+          <artifactId>scala-library</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>it.unimi.dsi</groupId>
+      <artifactId>fastutil</artifactId>
+      <version>7.0.12</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/main/scala</sourceDirectory>
+    <testSourceDirectory>src/test/scala</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <scalaVersion>${scala.version}</scalaVersion>
+          <args>
+            <arg>-target:jvm-1.7</arg>
+          </args>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.1.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2.1</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-my-jar-with-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <configuration>
+          <downloadSources>true</downloadSources>
+          <buildcommands>
+            <buildcommand>ch.epfl.lamp.sdt.core.scalabuilder</buildcommand>
+          </buildcommands>
+          <additionalProjectnatures>
+            <projectnature>ch.epfl.lamp.sdt.core.scalanature</projectnature>
+          </additionalProjectnatures>
+          <classpathContainers>
+            <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+            <classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
+          </classpathContainers>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <configuration>
+          <scalaVersion>${scala.version}</scalaVersion>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>
