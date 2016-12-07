@@ -7,9 +7,6 @@ import org.apache.log4j.Level
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.Encoders
 import scala.collection.Iterator
-
-//import org.apache.spark.sql.Encoders
-import java.util._
 /**
   * Created by YWJ on 2016.11.19.
   * Copyright (c) 2016 NJU PASA Lab All rights reserved.
