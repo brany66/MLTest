@@ -20,6 +20,8 @@ package edu.nju.pasalab
 
 import java.io.File
 
+import org.apache.log4j.{Level, Logger}
+
 import scala.io.Source._
 
 import org.apache.spark.sql.SparkSession
@@ -102,8 +104,10 @@ object DFSReadWriteTest {
     val localWordCount = runLocalWordCount(fileContents)
 
     println("Creating SparkSession")
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
     val spark = SparkSession
-      .builder
+      .builder.master("local[4]")
       .appName("DFS Read Write Test")
       .getOrCreate()
 

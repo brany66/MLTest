@@ -16,7 +16,7 @@
  */
 
 // scalastyle:off println
-package edu.nju.pasalab
+package edu.nju.pasalab.local
 
 import org.apache.spark.{SparkConf, SparkContext}
 

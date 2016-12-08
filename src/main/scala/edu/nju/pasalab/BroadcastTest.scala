@@ -18,6 +18,7 @@
 // scalastyle:off println
 package edu.nju.pasalab
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 
 /**
@@ -26,10 +27,12 @@ import org.apache.spark.sql.SparkSession
 object BroadcastTest {
   def main(args: Array[String]) {
 
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
     val blockSize = if (args.length > 2) args(2) else "4096"
 
     val spark = SparkSession
-      .builder()
+      .builder().master("local[4]")
       .appName("Broadcast Test")
       .config("spark.broadcast.blockSize", blockSize)
       .getOrCreate()

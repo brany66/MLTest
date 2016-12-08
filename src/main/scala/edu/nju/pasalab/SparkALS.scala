@@ -109,7 +109,7 @@ object SparkALS {
     println(s"Running with M=$M, U=$U, F=$F, iters=$ITERATIONS")
 
     val spark = SparkSession
-      .builder
+      .builder.master("local[4]")
       .appName("SparkALS")
       .getOrCreate()
 

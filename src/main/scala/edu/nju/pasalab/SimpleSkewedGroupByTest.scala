@@ -28,7 +28,7 @@ import org.apache.spark.sql.SparkSession
 object SimpleSkewedGroupByTest {
   def main(args: Array[String]) {
     val spark = SparkSession
-      .builder
+      .builder.master("local[4]")
       .appName("SimpleSkewedGroupByTest")
       .getOrCreate()
 

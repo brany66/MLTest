@@ -29,7 +29,7 @@ object MultiBroadcastTest {
   def main(args: Array[String]) {
 
     val spark = SparkSession
-      .builder
+      .builder.master("local[4]")
       .appName("Multi-Broadcast Test")
       .getOrCreate()
 
