@@ -11,7 +11,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- specify scala version in project -->
     <scala.version>2.10.4</scala.version>
-    <scala.binary.version>2.10</scala.binary.version>
+    <scala.binary.version>2.11</scala.binary.version>
     <!-- specify spark version in project -->
     <spark.version>2.0.2</spark.version>
     <hadoop.version>2.7.2</hadoop.version>
@@ -98,7 +98,7 @@
     <!-- list of spark dependencies -->
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_2.10</artifactId>
+      <artifactId>spark-core_2.11</artifactId>
       <version>${spark.version}</version>
       <!--<scope>provided</scope>-->
       <exclusions>
@@ -111,7 +111,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_2.10</artifactId>
+      <artifactId>spark-sql_2.11</artifactId>
       <version>${spark.version}</version>
       <exclusions>
         <exclusion>

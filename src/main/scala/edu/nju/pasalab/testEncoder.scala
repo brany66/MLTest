@@ -37,6 +37,7 @@ object testEncoder {
     //val A = spark.createDataset(List("A"))(Encoder[])
     val sample = ds.flatMap(e => e.split("\\s+"))(Encoders.STRING).groupByKey(x => x)
       .count()
+
     sample.show()
 
    import  org.apache.spark.util.collection.AppendOnlyMap
@@ -48,10 +49,17 @@ object testEncoder {
     val encoder  = Encoders.product[Person]
     println(encoder.schema)
     val t = spark.createDataset(list)(encoder)
+
+
     t.show()
+
     /** **/
     val df = Seq(("a", 10), ("a", 20), ("b", 1), ("b", 2), ("c", 1)).toDS()
     val da = df.groupByKey(v => (v._1, "word"))
+
+    val xy = da.mapGroups{case (g, iter) =>(g._1, iter.map(_._2).sum)}
+
+    xy.show()
     val res = da.flatMapGroups {
       case (g, iter) => Iterator(g._1 + " " + iter.map(_._2).sum.toString)
     }
