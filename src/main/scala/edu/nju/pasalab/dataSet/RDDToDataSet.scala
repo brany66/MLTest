@@ -94,10 +94,11 @@ object RDDToDataSet {
 
     //reduceByKey API
     val reduceCountByRDD = wordsPair.reduceByKey(_+_)
-    val reduceCountByDs = wordsPairDs.mapGroups((key,values) =>(key,values.length))
+
+    //val reduceCountByDs = wordsPairDs.mapGroups((key,values) =>(key,values.length))
 
     println(reduceCountByRDD.collect().toList)
-   println(reduceCountByDs.collect().toList)
+   //println(reduceCountByDs.collect().toList)
 
     //reduce function
     val rddReduce = doubleRDD.reduce((a,b) => a +b)
