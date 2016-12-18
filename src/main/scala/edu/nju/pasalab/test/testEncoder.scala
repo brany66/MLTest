@@ -25,8 +25,6 @@ object testEncoder {
     list.add(new Person("A", 1))
     list.add(new Person("B", 2))
 
-    //val strEncoder = Encoders.product[String]
-
     val ds  = spark.read.text("data/test1k.txt").as[String]
 //    val gp =ds.flatMap(e => e.split("\\s+")).map(x => (x, 1.0)).groupByKey(elem => elem._1)
 //    val gp1 = gp.mapGroups((k, v) => (k, v.map(x => x._2).sum))
