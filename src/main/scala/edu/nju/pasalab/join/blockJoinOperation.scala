@@ -46,7 +46,7 @@ class blockJoinOperation[K: ClassTag, V: ClassTag](rdd : RDD[(K, V)]) extends Se
     })
   }
 
-  def blockJoin[W]((ot : RDD[(K, W)], leftReplication : Int, rightReplication : Int) : RDD[(K, (V, W))] ={
+  def blockJoin[W](ot : RDD[(K, W)], leftReplication : Int, rightReplication : Int) : RDD[(K, (V, W))] ={
     blockJoin(ot, leftReplication, rightReplication, defaultPartitioner(rdd, ot))
   }
 
