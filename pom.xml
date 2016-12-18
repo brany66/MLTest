@@ -199,6 +199,12 @@
       <artifactId>avro</artifactId>
       <version>${avro.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.twitter/algebird-core_2.10 -->
+    <dependency>
+      <groupId>com.twitter</groupId>
+      <artifactId>algebird-core_2.10</artifactId>
+      <version>0.12.3</version>
+    </dependency>
   </dependencies>
 
   <build>
