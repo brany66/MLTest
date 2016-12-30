@@ -43,6 +43,15 @@ object joinOperation {
 
     val joined = df1.joinWith(df2, $"Table1._1" === $"Table2._1", "inner").map(elem => (elem._1._1, elem._1._2, elem._2._2))
     joined.show(20)
+
+    val leftOut = df1.joinWith(df2, $"Table1._1" === $"Table2._1", "left_outer")
+    leftOut.show(20)
+
+    val rightOut = df1.joinWith(df2, $"Table1._1" === $"Table2._1", "right_outer")
+    rightOut.show(20)
+
+    val leftSemi = df1.joinWith(df2, $"Table1._1" === $"Table2._1", "leftsemi")
+    leftSemi.show(20)
   }
 
   /**
