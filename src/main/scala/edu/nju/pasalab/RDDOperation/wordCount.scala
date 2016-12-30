@@ -20,11 +20,12 @@ object wordCount {
       * Use DataSet
       */
     val ds  = spark.read.textFile("data/test1k.txt")
+
     import spark.implicits._
     val sample = ds.flatMap(e => e.split("\\s+")).groupByKey(x => x)
-      .mapGroups((k, v) => (k ,v.length)).alias("A")
+      .mapGroups((k, v) => (k ,v.length))
     sample.show(20)
-    sample.write.mode(SaveMode.Overwrite).save("data/wordCount")
+    //sample.write.mode(SaveMode.Overwrite).format("json").save("data/wordCount")
   }
 
   def withStopWordFilter(rdd : RDD[String], illegalTokens : Array[Char], stopWords : Set[String]) : RDD[(String, Int)] = {
