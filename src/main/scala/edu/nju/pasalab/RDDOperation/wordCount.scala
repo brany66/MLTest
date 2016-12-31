@@ -10,9 +10,10 @@ import org.apache.spark.sql.{SaveMode, DataFrame, SparkSession}
   */
 object wordCount {
   def main(args: Array[String]) {
-    Logger.getLogger("org").setLevel(Level.OFF)
-    Logger.getLogger("akka").setLevel(Level.OFF)
+    //Logger.getLogger("org").setLevel(Level.OFF)
+    //Logger.getLogger("akka").setLevel(Level.OFF)
     val spark = SparkSession.builder().master("local[4]")
+
       //.config("spark.kryo.registrator", "edu.nju.pasalab.mt.wordAlignment.usemgiza.MyKryoRegistrator")
       .appName("test").getOrCreate()
 
@@ -23,9 +24,10 @@ object wordCount {
 
     import spark.implicits._
     val sample = ds.flatMap(e => e.split("\\s+")).groupByKey(x => x)
-      .mapGroups((k, v) => (k ,v.length))
+      .mapGroups((k, v) => (k ,v.length)).alias("A")
     sample.show(20)
-    //sample.write.mode(SaveMode.Overwrite).format("json").save("data/wordCount")
+    //sample.toDF().write.format("parquet").save("data:///words.parquet")
+    sample.toDF().write.parquet("data/words.parquet")
   }
 
   def withStopWordFilter(rdd : RDD[String], illegalTokens : Array[Char], stopWords : Set[String]) : RDD[(String, Int)] = {
