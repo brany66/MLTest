@@ -89,12 +89,6 @@
       <version>4.4</version>
       <scope>test</scope>
     </dependency>
-    <!--<dependency>
-      <groupId>org.specs</groupId>
-      <artifactId>specs</artifactId>
-      <version>1.2.5</version>
-      <scope>test</scope>
-    </dependency>-->
 
     <dependency>
       <groupId>org.scala-tools.testing</groupId>
@@ -223,6 +217,11 @@
       <version>1.13.4</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.ankurdave</groupId>
+      <artifactId>part</artifactId>
+      <version>0.2</version>
+    </dependency>
   </dependencies>
 
   <build>
