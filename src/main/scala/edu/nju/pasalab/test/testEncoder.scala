@@ -25,17 +25,16 @@ object testEncoder {
     list.add(new Person("A", 1))
     list.add(new Person("B", 2))
 
-    val ds  = spark.read.textFile("data/test1k.txt")
+    val ds  = spark.read.textFile("data/data.txt")
       //.as[String]
 //    val gp =ds.flatMap(e => e.split("\\s+")).map(x => (x, 1.0)).groupByKey(elem => elem._1)
 //    val gp1 = gp.mapGroups((k, v) => (k, v.map(x => x._2).sum))
 //    gp1.show()
 
-    val sample = ds.flatMap(e => e.split("\\s+")).groupByKey(x => x)
-      .mapGroups((k, v) => (k ,v.length)).alias("A")
+    val sample = ds.flatMap(e => e.split("\\s+")).groupByKey(x => x).mapGroups((k, v) => (k ,v.length)).alias("A")
 
+    sample.show(100)
 
-    sample.printSchema()
     import spark.implicits._
     spark.sqlContext.sql("set spark.sql.caseSensitive=false")
     val tb = sample.map(x => (x._1, (x._2 + 10)/ 5.0)).alias("B")

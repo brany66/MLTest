@@ -10,8 +10,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- specify scala version in project -->
-    <scala.version>2.10.4</scala.version>
-    <scala.binary.version>2.10</scala.binary.version>
+    <scala.version>2.11.8</scala.version>
+    <scala.binary.version>2.11</scala.binary.version>
     <!-- specify spark version in project -->
     <spark.version>2.1.0</spark.version>
     <hadoop.version>2.7.2</hadoop.version>
@@ -64,8 +64,8 @@
       <url>http://scala-tools.org/repo-releases</url>
     </repository>
     <repository>
-      <id>Repository ankurdave</id>
-      <url>https://raw.githubusercontent.com/ankurdave/maven-repo/master</url>
+      <id>Repo at github.com/ankurdave/maven-repoe</id>
+      <url>https://github.com/ankurdave/maven-repo</url>
     </repository>
   </repositories>
 
@@ -89,25 +89,23 @@
       <version>4.4</version>
       <scope>test</scope>
     </dependency>
+    <!--<dependency>
+      <groupId>org.specs</groupId>
+      <artifactId>specs</artifactId>
+      <version>1.2.5</version>
+      <scope>test</scope>
+    </dependency>-->
 
-      <!--
-      <dependency>
-          <groupId>org.specs</groupId>
-          <artifactId>specs</artifactId>
-          <version>1.2.5</version>
-          <scope>test</scope>
-      </dependency>
-      -->
-      <dependency>
-          <groupId>org.scala-tools.testing</groupId>
-          <artifactId>specs</artifactId>
-          <version>1.6.2.2_1.5.0</version>
-      </dependency>
+    <dependency>
+      <groupId>org.scala-tools.testing</groupId>
+      <artifactId>specs</artifactId>
+      <version>1.6.2.2_1.5.0</version>
+    </dependency>
 
     <!-- list of spark dependencies -->
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_2.10</artifactId>
+      <artifactId>spark-core_2.11</artifactId>
       <version>${spark.version}</version>
       <!--<scope>provided</scope>-->
       <exclusions>
@@ -120,7 +118,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_2.10</artifactId>
+      <artifactId>spark-sql_2.11</artifactId>
       <version>${spark.version}</version>
       <exclusions>
         <exclusion>
@@ -130,18 +128,7 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-      <groupId>amplab</groupId>
-      <artifactId>spark-indexedrdd</artifactId>
-      <version>0.3</version>
-      <exclusions>
-        <exclusion>
-          <!-- make sure wrong scala version is not pulled in -->
-          <groupId>org.scala-lang</groupId>
-          <artifactId>scala-library</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+
     <!-- list of hadoop dependencies -->
     <dependency>
       <groupId>org.apache.hadoop</groupId>
@@ -149,16 +136,19 @@
       <version>${hadoop.version}</version>
       <!--<scope>provided</scope>-->
     </dependency>
+
     <!-- list of trove4j dependencies -->
     <dependency>
       <groupId>net.sf.trove4j</groupId>
       <artifactId>trove4j</artifactId>
       <version>3.0.3</version>
     </dependency>
+
+
     <!-- list of breeze dependencies -->
     <dependency>
       <groupId>org.scalanlp</groupId>
-      <artifactId>breeze_2.10</artifactId>
+      <artifactId>breeze_2.11</artifactId>
       <version>${breeze.version}</version>
       <exclusions>
         <exclusion>
@@ -170,7 +160,7 @@
     </dependency>
     <dependency>
       <groupId>org.scalanlp</groupId>
-      <artifactId>breeze-natives_2.10</artifactId>
+      <artifactId>breeze-natives_2.11</artifactId>
       <version>${breeze.version}</version>
       <exclusions>
         <exclusion>
@@ -182,7 +172,7 @@
     </dependency>
     <dependency>
       <groupId>org.scalanlp</groupId>
-      <artifactId>breeze-viz_2.10</artifactId>
+      <artifactId>breeze-viz_2.11</artifactId>
       <version>${breeze.version}</version>
       <exclusions>
         <exclusion>
@@ -192,6 +182,8 @@
         </exclusion>
       </exclusions>
     </dependency>
+
+
     <dependency>
       <groupId>it.unimi.dsi</groupId>
       <artifactId>fastutil</artifactId>
@@ -203,26 +195,42 @@
       <artifactId>parquet-avro</artifactId>
       <version>1.0.0</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.avro</groupId>
-      <artifactId>avro</artifactId>
-      <version>${avro.version}</version>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/com.twitter/algebird-core_2.10 -->
     <dependency>
       <groupId>com.twitter</groupId>
       <artifactId>algebird-core_2.11</artifactId>
       <version>0.12.3</version>
     </dependency>
+
+
+    <dependency>
+      <groupId>org.apache.avro</groupId>
+      <artifactId>avro</artifactId>
+      <version>${avro.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.scalatest/scalatest_2.11 -->
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest_2.11</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.scalacheck/scalacheck_2.11 -->
+    <dependency>
+      <groupId>org.scalacheck</groupId>
+      <artifactId>scalacheck_2.11</artifactId>
+      <version>1.13.4</version>
+    </dependency>
+
   </dependencies>
 
   <build>
-    <sourceDirectory>src/main/scala</sourceDirectory>
-    <testSourceDirectory>src/test/scala</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
+        <version>2.15.2</version>
         <executions>
           <execution>
             <goals>
@@ -253,6 +261,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.0</version>
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
@@ -279,6 +288,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.10</version>
         <configuration>
           <downloadSources>true</downloadSources>
           <buildcommands>
@@ -293,36 +303,6 @@
           </classpathContainers>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.avro</groupId>
-        <artifactId>avro-maven-plugin</artifactId>
-        <version>${avro.version}</version>
-        <executions>
-          <execution>
-            <id>schemas</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>schema</goal>
-              <goal>protocol</goal>
-              <goal>idl-protocol</goal>
-            </goals>
-            <configuration>
-              <sourceDirectory>${project.basedir}/src/main/resources</sourceDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.scala-tools</groupId>
-        <artifactId>maven-scala-plugin</artifactId>
-        <configuration>
-          <scalaVersion>${scala.version}</scalaVersion>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
 </project>

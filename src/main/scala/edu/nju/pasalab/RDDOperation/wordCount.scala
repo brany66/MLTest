@@ -30,6 +30,7 @@ object wordCount {
     sample.toDF().write.parquet("data/words.parquet")
   }
 
+/*
   def withStopWordFilter(rdd : RDD[String], illegalTokens : Array[Char], stopWords : Set[String]) : RDD[(String, Int)] = {
     val tokens = rdd.flatMap(_.split(illegalTokens ++ Array[Char](' '))).map(_.trim.toLowerCase())
 
@@ -39,6 +40,7 @@ object wordCount {
 
     words
   }
+*/
 
   import org.apache.spark.sql.functions._
   def minMeanSizePerZip(pandas : DataFrame) : DataFrame = {
