@@ -18,7 +18,7 @@
     <!-- specify breeze version in project -->
     <breeze.version>0.12</breeze.version>
     <!-- specify java and Maven version in project -->
-    <java.version>1.7</java.version>
+    <java.version>1.8</java.version>
     <maven.version>3.3.9</maven.version>
     <avro.version>1.7.4</avro.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -83,12 +83,13 @@
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.4</version>
-      <scope>test</scope>
+      <version>4.12</version>
     </dependency>
+
 
     <dependency>
       <groupId>org.scala-tools.testing</groupId>
@@ -196,6 +197,13 @@
       <version>0.12.3</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>21.0</version>
+    </dependency>
+
 
     <dependency>
       <groupId>org.apache.avro</groupId>
@@ -241,7 +249,7 @@
         <configuration>
           <scalaVersion>${scala.version}</scalaVersion>
           <args>
-            <arg>-target:jvm-1.7</arg>
+            <arg>-target:jvm-1.8</arg>
           </args>
         </configuration>
       </plugin>

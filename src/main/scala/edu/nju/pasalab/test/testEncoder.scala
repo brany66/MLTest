@@ -42,9 +42,9 @@ object testEncoder {
     ja.show(20)
 
 //    val encoder2 = Encoders.tuple(Encoders.INT, Encoders.STRING)
-//    //val xxx = Encoders.kryo[Person]
+//    //val xxx = Encoders.kryo[JDK8Test.Person]
 //    println(encoder2.clsTag + " *** " + encoder2.schema)
-//    val encoder  = Encoders.product[Person]
+//    val encoder  = Encoders.product[JDK8Test.Person]
 //    println(encoder.schema)
 //    val t = spark.createDataset(list)(encoder)
 

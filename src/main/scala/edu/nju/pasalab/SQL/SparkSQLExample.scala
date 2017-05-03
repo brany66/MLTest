@@ -199,7 +199,7 @@ object SparkSQLExample {
     // For implicit conversions from RDDs to DataFrames
     import spark.implicits._
 
-    // Create an RDD of Person objects from a text file, convert it to a Dataframe
+    // Create an RDD of JDK8Test.Person objects from a text file, convert it to a Dataframe
     val peopleDF = spark.sparkContext
       .textFile("data/people.txt")
       .map(_.split(","))
