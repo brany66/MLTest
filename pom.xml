@@ -63,10 +63,6 @@
       <name>Scala-Tools Maven2 Repository</name>
       <url>http://scala-tools.org/repo-releases</url>
     </repository>
-    <repository>
-      <id>Repo at github.com/ankurdave/maven-repoe</id>
-      <url>https://github.com/ankurdave/maven-repo</url>
-    </repository>
   </repositories>
 
   <pluginRepositories>
@@ -117,7 +113,6 @@
       <version>${spark.version}</version>
       <exclusions>
         <exclusion>
-          <!-- make sure wrong scala version is not pulled in -->
           <groupId>org.scala-lang</groupId>
           <artifactId>scala-library</artifactId>
         </exclusion>
@@ -223,12 +218,6 @@
       <groupId>org.scalacheck</groupId>
       <artifactId>scalacheck_2.11</artifactId>
       <version>1.13.4</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.ankurdave</groupId>
-      <artifactId>part</artifactId>
-      <version>0.2</version>
     </dependency>
   </dependencies>
 
