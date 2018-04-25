@@ -6,28 +6,20 @@
   <inceptionYear>2008</inceptionYear>
 
   <properties>
-    <!-- specify project encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <!-- specify scala version in project -->
     <scala.version>2.11.8</scala.version>
     <scala.binary.version>2.11</scala.binary.version>
-    <!-- specify spark version in project -->
-    <spark.version>2.1.0</spark.version>
+    <spark.version>2.3.0</spark.version>
     <hadoop.version>2.7.2</hadoop.version>
-    <!-- specify breeze version in project -->
-    <breeze.version>0.12</breeze.version>
-    <!-- specify java and Maven version in project -->
     <java.version>1.8</java.version>
     <maven.version>3.3.9</maven.version>
-    <avro.version>1.7.4</avro.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <repositories>
     <repository>
       <id>central</id>
-      <!-- This should be at top, it makes maven try the central repo first and then others and hence faster dep resolution -->
       <name>Maven Repository</name>
       <url>https://repo1.maven.org/maven2</url>
       <releases>
@@ -37,27 +29,7 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-    <!-- list of other repositories -->
-    <repository>
-      <id>SparkPackagesRepo</id>
-      <url>http://dl.bintray.com/spark-packages/maven</url>
-    </repository>
-    <repository>
-      <id>Typesafe Repository</id>
-      <url>https://repo.typesafe.com/typesafe/releases/</url>
-    </repository>
-    <repository>
-      <id>Akka Repository</id>
-      <url>http://repo.akka.io/releases/</url>
-    </repository>
-    <repository>
-      <id>Sonatype Snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </repository>
-    <repository>
-      <id>Sonatype Releases</id>
-      <url>https://oss.sonatype.org/content/repositories/releases/</url>
-    </repository>
+
     <repository>
       <id>scala-tools.org</id>
       <name>Scala-Tools Maven2 Repository</name>
@@ -86,22 +58,13 @@
       <version>4.12</version>
     </dependency>
 
-
-    <dependency>
-      <groupId>org.scala-tools.testing</groupId>
-      <artifactId>specs</artifactId>
-      <version>1.6.2.2_1.5.0</version>
-    </dependency>
-
     <!-- list of spark dependencies -->
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_2.11</artifactId>
       <version>${spark.version}</version>
-      <!--<scope>provided</scope>-->
       <exclusions>
         <exclusion>
-          <!-- make sure wrong scala version is not pulled in -->
           <groupId>org.scala-lang</groupId>
           <artifactId>scala-library</artifactId>
         </exclusion>
@@ -111,66 +74,24 @@
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-sql_2.11</artifactId>
       <version>${spark.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.scala-lang</groupId>
-          <artifactId>scala-library</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-mllib_2.11</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-mllib-local_2.11</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+
 
     <!-- list of hadoop dependencies -->
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-client</artifactId>
       <version>${hadoop.version}</version>
-      <!--<scope>provided</scope>-->
-    </dependency>
-
-    <!-- list of trove4j dependencies -->
-    <dependency>
-      <groupId>net.sf.trove4j</groupId>
-      <artifactId>trove4j</artifactId>
-      <version>3.0.3</version>
-    </dependency>
-
-
-    <!-- list of breeze dependencies -->
-    <dependency>
-      <groupId>org.scalanlp</groupId>
-      <artifactId>breeze_2.11</artifactId>
-      <version>${breeze.version}</version>
-      <exclusions>
-        <exclusion>
-          <!-- make sure wrong scala version is not pulled in -->
-          <groupId>org.scala-lang</groupId>
-          <artifactId>scala-library</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.scalanlp</groupId>
-      <artifactId>breeze-natives_2.11</artifactId>
-      <version>${breeze.version}</version>
-      <exclusions>
-        <exclusion>
-          <!-- make sure wrong scala version is not pulled in -->
-          <groupId>org.scala-lang</groupId>
-          <artifactId>scala-library</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.scalanlp</groupId>
-      <artifactId>breeze-viz_2.11</artifactId>
-      <version>${breeze.version}</version>
-      <exclusions>
-        <exclusion>
-          <!-- make sure wrong scala version is not pulled in -->
-          <groupId>org.scala-lang</groupId>
-          <artifactId>scala-library</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
 
@@ -181,44 +102,12 @@
     </dependency>
 
     <dependency>
-      <groupId>com.twitter</groupId>
-      <artifactId>parquet-avro</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.twitter/algebird-core_2.10 -->
-    <dependency>
-      <groupId>com.twitter</groupId>
-      <artifactId>algebird-core_2.11</artifactId>
-      <version>0.12.3</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>21.0</version>
     </dependency>
 
 
-    <dependency>
-      <groupId>org.apache.avro</groupId>
-      <artifactId>avro</artifactId>
-      <version>${avro.version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.scalatest/scalatest_2.11 -->
-    <dependency>
-      <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_2.11</artifactId>
-      <version>3.0.1</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.scalacheck/scalacheck_2.11 -->
-    <dependency>
-      <groupId>org.scalacheck</groupId>
-      <artifactId>scalacheck_2.11</artifactId>
-      <version>1.13.4</version>
-    </dependency>
   </dependencies>
 
   <build>
@@ -254,6 +143,7 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -263,24 +153,7 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2.1</version>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-        <executions>
-          <execution>
-            <id>make-my-jar-with-dependencies</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
