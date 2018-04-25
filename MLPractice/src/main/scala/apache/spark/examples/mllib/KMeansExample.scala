@@ -18,18 +18,23 @@
 // scalastyle:off println
 package org.apache.spark.examples.mllib
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.{SparkConf, SparkContext}
 // $example on$
 import org.apache.spark.mllib.clustering.{KMeans, KMeansModel}
-import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.linalg.{Vector, Vectors}
 // $example off$
 
 object KMeansExample {
 
   def main(args: Array[String]) {
 
-    val conf = new SparkConf().setAppName("KMeansExample")
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+
+    val conf = new SparkConf().setAppName("KMeansExample").setMaster("local[4]")
     val sc = new SparkContext(conf)
+
 
     // $example on$
     // Load and parse the data
