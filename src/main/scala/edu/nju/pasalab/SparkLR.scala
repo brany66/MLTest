@@ -79,7 +79,7 @@ object SparkLR {
     for (i <- 1 to ITERATIONS) {
       println("On iteration " + i)
       val gradient = points.map { p =>
-        p.x * (1 / (1 + exp(-p.y * (w.dot(p.x)))) - 1) * p.y
+        p.x * (1 / (1 + exp(-p.y * w.dot(p.x))) - 1) * p.y
       }.reduce(_ + _)
       w -= gradient
     }

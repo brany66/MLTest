@@ -18,16 +18,16 @@
 // scalastyle:off println
 package org.apache.spark.examples
 
-import breeze.linalg.{squaredDistance, DenseVector, Vector}
-
+import breeze.linalg.{DenseVector, Vector, squaredDistance}
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 
 /**
- * K-means clustering.
- *
- * This is an example implementation for learning how to use Spark. For more conventional use,
- * please refer to org.apache.spark.ml.clustering.KMeans.
- */
+  * K-means clustering.
+  *
+  * This is an example implementation for learning how to use Spark. For more conventional use,
+  * please refer to org.apache.spark.ml.clustering.KMeans.
+  */
 object SparkKMeans {
 
   def parseVector(line: String): Vector[Double] = {
@@ -58,6 +58,8 @@ object SparkKMeans {
   }
 
   def main(args: Array[String]) {
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
 
     if (args.length < 3) {
       System.err.println("Usage: SparkKMeans <file> <k> <convergeDist>")
@@ -67,7 +69,7 @@ object SparkKMeans {
     showWarning()
 
     val spark = SparkSession
-      .builder
+      .builder.master("local[4]")
       .appName("SparkKMeans")
       .getOrCreate()
 
@@ -79,13 +81,14 @@ object SparkKMeans {
     val kPoints = data.takeSample(withReplacement = false, K, 42)
     var tempDist = 1.0
 
-    while(tempDist > convergeDist) {
-      val closest = data.map (p => (closestPoint(p, kPoints), (p, 1)))
+    while (tempDist > convergeDist) {
+      val closest = data.map(p => (closestPoint(p, kPoints), (p, 1)))
 
-      val pointStats = closest.reduceByKey{case ((p1, c1), (p2, c2)) => (p1 + p2, c1 + c2)}
+      val pointStats = closest.reduceByKey { case ((p1, c1), (p2, c2)) => (p1 + p2, c1 + c2) }
 
-      val newPoints = pointStats.map {pair =>
-        (pair._1, pair._2._1 * (1.0 / pair._2._2))}.collectAsMap()
+      val newPoints = pointStats.map { pair =>
+        (pair._1, pair._2._1 * (1.0 / pair._2._2))
+      }.collectAsMap()
 
       tempDist = 0.0
       for (i <- 0 until K) {
@@ -103,4 +106,5 @@ object SparkKMeans {
     spark.stop()
   }
 }
+
 // scalastyle:on println

@@ -20,23 +20,27 @@ package org.apache.spark.examples.ml
 // scalastyle:off println
 
 // $example on$
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.clustering.KMeans
 import org.apache.spark.ml.evaluation.ClusteringEvaluator
 // $example off$
 import org.apache.spark.sql.SparkSession
 
 /**
- * An example demonstrating k-means clustering.
- * Run with
- * {{{
- * bin/run-example ml.KMeansExample
- * }}}
- */
+  * An example demonstrating k-means clustering.
+  * Run with
+  * {{{
+  * bin/run-example ml.KMeansExample
+  * }}}
+  */
 object KMeansExample {
 
   def main(args: Array[String]): Unit = {
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+
     val spark = SparkSession
-      .builder
+      .builder.master("local[4]")
       .appName(s"${this.getClass.getSimpleName}")
       .getOrCreate()
 
@@ -65,4 +69,5 @@ object KMeansExample {
     spark.stop()
   }
 }
+
 // scalastyle:on println

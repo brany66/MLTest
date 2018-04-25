@@ -19,6 +19,7 @@
 package org.apache.spark.examples.ml
 
 // $example on$
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.linalg.Vectors
 import org.apache.spark.ml.regression.AFTSurvivalRegression
 // $example off$
@@ -34,8 +35,10 @@ import org.apache.spark.sql.SparkSession
 object AFTSurvivalRegressionExample {
 
   def main(args: Array[String]): Unit = {
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
     val spark = SparkSession
-      .builder
+      .builder.master("local[4]")
       .appName("AFTSurvivalRegressionExample")
       .getOrCreate()
 
