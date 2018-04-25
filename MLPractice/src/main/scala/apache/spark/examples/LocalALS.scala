@@ -16,19 +16,17 @@
  */
 
 // scalastyle:off println
-package edu.nju.pasalab
+package org.apache.spark.examples
 
 import org.apache.commons.math3.linear._
 
-import org.apache.spark.sql.SparkSession
-
 /**
-  * Alternating least squares matrix factorization.
-  *
-  * This is an example implementation for learning how to use Spark. For more conventional use,
-  * please refer to org.apache.spark.ml.recommendation.ALS.
-  */
-object SparkALS {
+ * Alternating least squares matrix factorization.
+ *
+ * This is an example implementation for learning how to use Spark. For more conventional use,
+ * please refer to org.apache.spark.ml.recommendation.ALS.
+ */
+object LocalALS {
 
   // Parameters set through command line arguments
   var M = 0 // Number of movies
@@ -57,9 +55,7 @@ object SparkALS {
     math.sqrt(sumSqs / (M.toDouble * U.toDouble))
   }
 
-  def update(i: Int, m: RealVector, us: Array[RealVector], R: RealMatrix): RealVector = {
-    val U = us.length
-    val F = us(0).getDimension
+  def updateMovie(i: Int, m: RealVector, us: Array[RealVector], R: RealMatrix) : RealVector = {
     var XtX: RealMatrix = new Array2DRowRealMatrix(F, F)
     var Xty: RealVector = new ArrayRealVector(F)
     // For each user that rated the movie
@@ -70,9 +66,28 @@ object SparkALS {
       // Add u * rating to Xty
       Xty = Xty.add(u.mapMultiply(R.getEntry(i, j)))
     }
-    // Add regularization coefs to diagonal terms
+    // Add regularization coefficients to diagonal terms
     for (d <- 0 until F) {
       XtX.addToEntry(d, d, LAMBDA * U)
+    }
+    // Solve it with Cholesky
+    new CholeskyDecomposition(XtX).getSolver.solve(Xty)
+  }
+
+  def updateUser(j: Int, u: RealVector, ms: Array[RealVector], R: RealMatrix) : RealVector = {
+    var XtX: RealMatrix = new Array2DRowRealMatrix(F, F)
+    var Xty: RealVector = new ArrayRealVector(F)
+    // For each movie that the user rated
+    for (i <- 0 until M) {
+      val m = ms(i)
+      // Add m * m^t to XtX
+      XtX = XtX.add(m.outerProduct(m))
+      // Add m * rating to Xty
+      Xty = Xty.add(m.mapMultiply(R.getEntry(i, j)))
+    }
+    // Add regularization coefficients to diagonal terms
+    for (d <- 0 until F) {
+      XtX.addToEntry(d, d, LAMBDA * M)
     }
     // Solve it with Cholesky
     new CholeskyDecomposition(XtX).getSolver.solve(Xty)
@@ -88,32 +103,20 @@ object SparkALS {
 
   def main(args: Array[String]) {
 
-    var slices = 0
-
-    val options = (0 to 4).map(i => if (i < args.length) Some(args(i)) else None)
-
-    options.toArray match {
-      case Array(m, u, f, iters, slices_) =>
-        M = m.getOrElse("100").toInt
-        U = u.getOrElse("500").toInt
-        F = f.getOrElse("10").toInt
-        ITERATIONS = iters.getOrElse("5").toInt
-        slices = slices_.getOrElse("2").toInt
+    args match {
+      case Array(m, u, f, iters) =>
+        M = m.toInt
+        U = u.toInt
+        F = f.toInt
+        ITERATIONS = iters.toInt
       case _ =>
-        System.err.println("Usage: SparkALS [M] [U] [F] [iters] [slices]")
+        System.err.println("Usage: LocalALS <M> <U> <F> <iters>")
         System.exit(1)
     }
 
     showWarning()
 
     println(s"Running with M=$M, U=$U, F=$F, iters=$ITERATIONS")
-
-    val spark = SparkSession
-      .builder.master("local[4]")
-      .appName("SparkALS")
-      .getOrCreate()
-
-    val sc = spark.sparkContext
 
     val R = generateR()
 
@@ -122,24 +125,12 @@ object SparkALS {
     var us = Array.fill(U)(randomVector(F))
 
     // Iteratively update movies then users
-    val Rc = sc.broadcast(R)
-    var msb = sc.broadcast(ms)
-    var usb = sc.broadcast(us)
     for (iter <- 1 to ITERATIONS) {
       println(s"Iteration $iter:")
-      ms = sc.parallelize(0 until M, slices)
-        .map(i => update(i, msb.value(i), usb.value, Rc.value))
-        .collect()
-      msb = sc.broadcast(ms) // Re-broadcast ms because it was updated
-      us = sc.parallelize(0 until U, slices)
-        .map(i => update(i, usb.value(i), msb.value, Rc.value.transpose()))
-        .collect()
-      usb = sc.broadcast(us) // Re-broadcast us because it was updated
-      println("RMSE = " + rmse(R, ms, us))
-      println()
+      ms = (0 until M).map(i => updateMovie(i, ms(i), us, R)).toArray
+      us = (0 until U).map(j => updateUser(j, us(j), ms, R)).toArray
+      println(s"RMSE = ${rmse(R, ms, us)}")
     }
-
-    spark.stop()
   }
 
   private def randomVector(n: Int): RealVector =
@@ -149,5 +140,4 @@ object SparkALS {
     new Array2DRowRealMatrix(Array.fill(rows, cols)(math.random))
 
 }
-
 // scalastyle:on println
