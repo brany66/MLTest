@@ -94,6 +94,11 @@
       <version>${hadoop.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.scalanlp</groupId>
+      <artifactId>breeze_2.11</artifactId>
+      <version>0.12</version>
+    </dependency>
 
     <dependency>
       <groupId>it.unimi.dsi</groupId>
@@ -106,7 +111,6 @@
       <artifactId>guava</artifactId>
       <version>21.0</version>
     </dependency>
-
 
   </dependencies>
 
