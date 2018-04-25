@@ -47,7 +47,7 @@ object SparkTC {
     Logger.getLogger("akka").setLevel(Level.OFF)
 
     val spark = SparkSession
-      .builder
+      .builder.master("local[4]")
       .appName("SparkTC")
       .getOrCreate()
     val slices = if (args.length > 0) args(0).toInt else 2

@@ -18,25 +18,26 @@
 // scalastyle:off println
 package org.apache.spark.examples
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 
 /**
- * Computes the PageRank of URLs from an input file. Input file should
- * be in format of:
- * URL         neighbor URL
- * URL         neighbor URL
- * URL         neighbor URL
- * ...
- * where URL and their neighbors are separated by space(s).
- *
- * This is an example implementation for learning how to use Spark. For more conventional use,
- * please refer to org.apache.spark.graphx.lib.PageRank
- *
- * Example Usage:
- * {{{
- * bin/run-example SparkPageRank data/mllib/pagerank_data.txt 10
- * }}}
- */
+  * Computes the PageRank of URLs from an input file. Input file should
+  * be in format of:
+  * URL         neighbor URL
+  * URL         neighbor URL
+  * URL         neighbor URL
+  * ...
+  * where URL and their neighbors are separated by space(s).
+  *
+  * This is an example implementation for learning how to use Spark. For more conventional use,
+  * please refer to org.apache.spark.graphx.lib.PageRank
+  *
+  * Example Usage:
+  * {{{
+  * bin/run-example SparkPageRank data/mllib/pagerank_data.txt 10
+  * }}}
+  */
 object SparkPageRank {
 
   def showWarning() {
@@ -53,23 +54,25 @@ object SparkPageRank {
       System.exit(1)
     }
 
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
     showWarning()
 
     val spark = SparkSession
-      .builder
+      .builder.master("local[4]")
       .appName("SparkPageRank")
       .getOrCreate()
 
     val iters = if (args.length > 1) args(1).toInt else 10
     val lines = spark.read.textFile(args(0)).rdd
-    val links = lines.map{ s =>
+    val links = lines.map { s =>
       val parts = s.split("\\s+")
       (parts(0), parts(1))
     }.distinct().groupByKey().cache()
     var ranks = links.mapValues(v => 1.0)
 
     for (i <- 1 to iters) {
-      val contribs = links.join(ranks).values.flatMap{ case (urls, rank) =>
+      val contribs = links.join(ranks).values.flatMap { case (urls, rank) =>
         val size = urls.size
         urls.map(url => (url, rank / size))
       }
@@ -82,4 +85,5 @@ object SparkPageRank {
     spark.stop()
   }
 }
+
 // scalastyle:on println
