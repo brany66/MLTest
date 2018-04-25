@@ -18,14 +18,15 @@
 // scalastyle:off println
 package org.apache.spark.examples
 
+import org.apache.log4j.{Level, Logger}
+
 import scala.collection.mutable
 import scala.util.Random
-
 import org.apache.spark.sql.SparkSession
 
 /**
- * Transitive closure on a graph.
- */
+  * Transitive closure on a graph.
+  */
 object SparkTC {
   val numEdges = 200
   val numVertices = 100
@@ -42,6 +43,9 @@ object SparkTC {
   }
 
   def main(args: Array[String]) {
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+
     val spark = SparkSession
       .builder
       .appName("SparkTC")
@@ -72,4 +76,5 @@ object SparkTC {
     spark.stop()
   }
 }
+
 // scalastyle:on println

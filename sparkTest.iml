@@ -142,6 +142,7 @@
     <orderEntry type="library" name="Maven: org.apache.spark:spark-streaming_2.11:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-graphx_2.11:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-mllib-local_2.11:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.scopt:scopt_2.11:3.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-client:2.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-common:2.7.2" level="project" />
     <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.2" level="project" />
