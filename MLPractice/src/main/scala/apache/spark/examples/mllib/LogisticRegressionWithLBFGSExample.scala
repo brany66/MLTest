@@ -18,6 +18,7 @@
 // scalastyle:off println
 package org.apache.spark.examples.mllib
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.{SparkConf, SparkContext}
 // $example on$
 import org.apache.spark.mllib.classification.{LogisticRegressionModel, LogisticRegressionWithLBFGS}
@@ -29,7 +30,10 @@ import org.apache.spark.mllib.util.MLUtils
 object LogisticRegressionWithLBFGSExample {
 
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("LogisticRegressionWithLBFGSExample")
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+
+    val conf = new SparkConf().setAppName("LogisticRegressionWithLBFGSExample").setMaster("local[4]")
     val sc = new SparkContext(conf)
 
     // $example on$

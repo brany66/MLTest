@@ -18,6 +18,7 @@
 // scalastyle:off println
 package org.apache.spark.examples.mllib
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.{SparkConf, SparkContext}
 // $example on$
 import org.apache.spark.mllib.fpm.PrefixSpan
@@ -26,7 +27,10 @@ import org.apache.spark.mllib.fpm.PrefixSpan
 object PrefixSpanExample {
 
   def main(args: Array[String]) {
-    val conf = new SparkConf().setAppName("PrefixSpanExample")
+    Logger.getLogger("org").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+
+    val conf = new SparkConf().setAppName("PrefixSpanExample").setMaster("local[4]")
     val sc = new SparkContext(conf)
 
     // $example on$
