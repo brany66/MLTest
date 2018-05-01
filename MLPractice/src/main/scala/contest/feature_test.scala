@@ -17,6 +17,7 @@ object feature_test {
 
     val data = spark.read.text("data/contest/feature_context.0.0").rdd
 
+
     spark.stop()
   }
 }
