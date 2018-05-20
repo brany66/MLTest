@@ -1,7 +1,7 @@
 # RNN & LSTM
   Spark new Verrsion(2.0.2) use example
 
-2. RNN-1: https://zhuanlan.zhihu.com/p/34309635
+2. Coursera吴恩达《序列模型》课程笔记（1）-- 循环神经网络: https://zhuanlan.zhihu.com/p/34309635
 3. 10分钟机器学习： https://zhuanlan.zhihu.com/p/36134087
 - YJango的循环神经网络——介绍：https://zhuanlan.zhihu.com/p/24720659 
 - 循环神经网络实现-LSTM：https://zhuanlan.zhihu.com/p/25518711
