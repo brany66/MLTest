@@ -1,4 +1,4 @@
-# sparkNewFeatureTest
+# RNN & LSTM
   Spark new Verrsion(2.0.2) use example
 
 2. RNN-1: https://zhuanlan.zhihu.com/p/34309635
