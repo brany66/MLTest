@@ -1,7 +1,6 @@
 # sparkNewFeatureTest
   Spark new Verrsion(2.0.2) use example
 
-1. RNN :  https://zhuanlan.zhihu.com/p/24720659
 2. RNN-1: https://zhuanlan.zhihu.com/p/34309635
 3. 10分钟机器学习： https://zhuanlan.zhihu.com/p/36134087
 - YJango的循环神经网络——介绍：https://zhuanlan.zhihu.com/p/24720659 
