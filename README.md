@@ -4,9 +4,9 @@
 1. RNN :  https://zhuanlan.zhihu.com/p/24720659
 2. RNN-1: https://zhuanlan.zhihu.com/p/34309635
 3. 10分钟机器学习： https://zhuanlan.zhihu.com/p/36134087
-YJango的循环神经网络——介绍：https://zhuanlan.zhihu.com/p/24720659
-循环神经网络实现-LSTM：https://zhuanlan.zhihu.com/p/25518711
-YJango的循环神经网络——双向LSTM&GRU： https://zhuanlan.zhihu.com/p/25858226
+- YJango的循环神经网络——介绍：https://zhuanlan.zhihu.com/p/24720659 
+- 循环神经网络实现-LSTM：https://zhuanlan.zhihu.com/p/25518711
+- YJango的循环神经网络——双向LSTM&GRU： https://zhuanlan.zhihu.com/p/25858226
 
 4. 超能智体：https://zhuanlan.zhihu.com/YJango
 5. ”CNN是空间上的深度网络，RNN是时间上的深度网络“这句话怎么理解？https://www.zhihu.com/question/40585807/answer/139234906
