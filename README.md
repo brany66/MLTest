@@ -14,5 +14,6 @@
 7. 深层神经网络设计理念（在线+视频+幻灯片: https://zhuanlan.zhihu.com/p/26647094
 8. YJango的卷积神经网络——介绍: https://zhuanlan.zhihu.com/p/27642620
 9. 深度学习为啥要deep-1： https://zhuanlan.zhihu.com/p/22888385
-10:深度学习为啥要deep-2： https://zhuanlan.zhihu.com/p/24245040
+
+10.深度学习为啥要deep-2： https://zhuanlan.zhihu.com/p/24245040
 11. 
