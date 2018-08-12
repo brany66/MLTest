@@ -16,7 +16,7 @@ object train_csv {
       .appName("train_test")
       .getOrCreate()
 
-    /*val data = spark.sparkContext.textFile("data/contest/model_data/train_csv").map(elem => {
+    val data = spark.sparkContext.textFile("data/contest/model_data/train_csv").map(elem => {
       val arr = elem.split("\t")
 
       val value = arr(1).split(",")
@@ -54,24 +54,7 @@ object train_csv {
     for (elem <- join) {
       writer.println(elem)
     }
-    writer.close()*/
-
-
-    val test = spark.sparkContext.textFile("data/contest/test_csv").map(elem => {
-      val arr = elem.split("\t")
-      (arr(0), arr(1))
-    }).map(elem => elem._1 + "," + elem._2)
-
-    println(test.count())
-
-  val writer: PrintWriter = new PrintWriter("data/contest/model_data/test.1.1.csv", "UTF-8")
-    val local = test.collect()
-    println(local.length)
-
-
-    for (elem <- local) {
-      writer.println(elem)
-    }
+    writer.close()
 
     spark.stop()
 

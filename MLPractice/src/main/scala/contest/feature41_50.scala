@@ -3,8 +3,6 @@ package contest
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 
-import scala.collection.mutable
-
 object feature41_50 {
   def main(args: Array[String]): Unit = {
 
