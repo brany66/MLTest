@@ -16,3 +16,16 @@
 
 10.深度学习为啥要deep-2： https://zhuanlan.zhihu.com/p/24245040
 11. 
+mvn install:install-file -Dfile=chaski-0.0-latest.jar -DgroupId=edu.nju.pasalab -DartifactId=Chaski -Dversion=1.0 -Dpackaging=jar
+mvn install:install-file -Dfile=jpfm-0.1-latest.jar -DgroupId=edu.nju.pasalab -DartifactId=jpfm -Dversion=1.0 -Dpackaging=jar
+
+mvn install:install-file -Dfile=part_2.10-0.1.jar -DgroupId=com.ankurdave -DartifactId=part -Dversion=0.1 -Dpackaging=jar
+mvn install:install-file -Dfile=part_2.10-0.2.jar -DgroupId=com.ankurdave -DartifactId=part -Dversion=0.2 -Dpackaging=jar
+
+
+git remote -v : list all remote repo
+git remote set-url origin ****
+
+git remote rm origin
+
+git remote add origin ***
